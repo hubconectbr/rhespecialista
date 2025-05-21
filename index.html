@@ -12,7 +12,8 @@
             
             /* Tema Padrão (Roxo/Rosa - Sol ☀️) */
             --bg-main-default: #1A002B;
-            --bg-hero-default: #2D0049; 
+            --bg-hero-overlay-start-default: rgba(45, 0, 73, 0.75); /* #2D0049 com opacidade */
+            --bg-hero-overlay-end-default: rgba(45, 0, 73, 0.9);   /* #2D0049 com mais opacidade */
             --text-primary-default: #FFFFFF;
             --text-secondary-default: #E9D8FF;
             --text-lighter-default: #D8BFD8;
@@ -42,7 +43,8 @@
 
         [data-theme="grafite"] {
             --bg-main-default: #000020; 
-            --bg-hero-default: #171a4a;  
+            --bg-hero-overlay-start-default: rgba(23, 26, 74, 0.75); /* #171a4a com opacidade */
+            --bg-hero-overlay-end-default: rgba(23, 26, 74, 0.9);   /* #171a4a com mais opacidade */
             --text-primary-default: #FFFFFF; 
             --text-secondary-default: #D1D5DB; 
             --text-lighter-default: #9CA3AF; 
@@ -78,27 +80,20 @@
         }
         
         #hero-main {
-            background-color: var(--bg-hero-default);
-            min-height: 250px; /* Altura mínima absoluta */
-            /* Ajuste a altura da viewport conforme necessário, pode ser maior para dar mais espaço à imagem */
-            /* min-height: clamp(250px, 60vh, 700px);  Uma forma de controlar altura mínima e máxima */
-            display: flex; /* Alterado para flex */
-            overflow: hidden; /* Para conter a imagem se ela for maior que o contêiner */
+            background-image: linear-gradient(var(--bg-hero-overlay-start-default), var(--bg-hero-overlay-end-default)), url('imagens/imagem_padrao_pagina_principal.png');
+            background-size: cover;
+            background-position: center;
+            min-height: clamp(400px, 70vh, 800px); /* Altura responsiva com mínimo e máximo */
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding-top: 5rem; /* Espaço para o nav */
+            padding-bottom: 3rem;
         }
 
         .hero-content {
-            z-index: 10; /* Para garantir que o texto fique sobre qualquer overlay futuro */
+            z-index: 10; 
         }
-        .hero-image-container {
-            height: 100%; /* Para a imagem tentar preencher a altura do hero */
-        }
-         .hero-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Para cobrir o espaço do contêiner, pode cortar */
-            object-position: center; /* Centraliza a imagem no corte */
-        }
-
 
         .primary-text { color: var(--text-primary-default); } 
         .secondary-text { color: var(--text-secondary-default); } 
@@ -279,9 +274,7 @@
         }
 
         @media (max-width: 768px) {
-            #hero-main { flex-direction: column; min-height: auto; } /* Empilha em telas pequenas */
-            .hero-content { text-align: center; padding-bottom: 2rem; }
-            .hero-image-container { width: 100%; max-height: 300px; } /* Ajusta imagem em mobile */
+            #hero-main { min-height: 50vh; }
             .floating-attendant { width: 120px; bottom: 15px; right: 15px; }
             .floating-attendant-top { width: 100px; top: 80px; left: 15px; }
         }
@@ -332,7 +325,8 @@
 
     </style>
     <!-- Visualization & Content Choices: 
-        - Hero: Text left, image right. Goal: Inform, Engage, Visual Appeal.
+        - Hero: Text over full-width background image. Goal: Inform, Engage, Visual Appeal.
+        - Demo section moved into "Como Usar". Nav link "Demonstração" now points to "Como Usar".
         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
 </head>
@@ -345,8 +339,7 @@
                 <div class="hidden md:flex space-x-6 mr-6">
                     <a href="#temas-overview" class="nav-link nav-link-text transition-colors">Temas</a>
                     <a href="#especialistas" class="nav-link nav-link-text transition-colors">Especialistas</a>
-                    <a href="#demonstracao" class="nav-link nav-link-text transition-colors">Demonstração</a>
-                    <a href="#como-usar" class="nav-link nav-link-text transition-colors">Como Usar</a>
+                    <a href="#como-usar" class="nav-link nav-link-text transition-colors">Demonstração</a> 
                     <a href="#planos" class="nav-link nav-link-text transition-colors">Planos</a>
                     <a href="#faq" class="nav-link nav-link-text transition-colors">FAQ</a>
                 </div>
@@ -363,27 +356,21 @@
         <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-gray-800 bg-opacity-95 shadow-lg py-2" style="background-color: var(--nav-bg-default);">
             <a href="#temas-overview" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Temas</a>
             <a href="#especialistas" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Especialistas</a>
-            <a href="#demonstracao" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Demonstração</a>
-            <a href="#como-usar" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Como Usar</a>
+            <a href="#como-usar" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Demonstração</a>
             <a href="#planos" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Planos</a>
             <a href="#faq" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">FAQ</a>
             <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="block px-4 py-2 accent-bg text-white text-center mx-4 my-2 rounded-lg">Começar Agora</a>
         </div>
     </nav>
 
-    <header id="hero-main" class="text-white px-4">
-        <div class="container mx-auto flex flex-col md:flex-row items-center gap-8 py-12 md:py-0">
-            <div class="hero-content md:w-1/2 lg:w-2/5 text-center md:text-left">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight primary-text">Transforme seu Departamento de RH</h1>
-                <p class="text-xl md:text-2xl mb-4 opacity-90 text-secondary-default">Delegue até 90% do seu trabalho para <strong class="accent-text">50 assistentes de IA</strong> especializados.</p>
-                <p class="text-lg mb-10 opacity-80 text-secondary-default">Um exército de especialistas em Recursos Humanos disponíveis 24/7 para automatizar processos, aumentar produtividade e reduzir custos.</p>
-                <div class="space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="accent-bg text-white font-semibold py-3 px-8 rounded-lg text-lg hover:opacity-80 transition-opacity inline-block shadow-lg">Começar Agora</a>
-                    <a href="#demonstracao" id="verDemoButton" class="border-2 accent-border accent-text font-semibold py-3 px-7 rounded-lg text-lg hover:accent-bg hover:text-white transition-colors inline-block shadow-lg">Ver Demonstração</a>
-                </div>
-            </div>
-            <div class="hero-image-container md:w-1/2 lg:w-3/5">
-                <img src="imagens/imagem_padrao_pagina_principal.png" alt="Especialistas de RH e IA" class="rounded-lg shadow-2xl">
+    <header id="hero-main" class="text-white px-4 relative">
+        <div class="hero-content container mx-auto text-center max-w-3xl">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight primary-text">Transforme seu Departamento de RH</h1>
+            <p class="text-xl md:text-2xl mb-4 opacity-90 text-secondary-default">Delegue até 90% do seu trabalho para <strong class="accent-text">50 assistentes de IA</strong> especializados.</p>
+            <p class="text-lg mb-10 opacity-80 text-secondary-default">Um exército de especialistas em Recursos Humanos disponíveis 24/7 para automatizar processos, aumentar produtividade e reduzir custos.</p>
+            <div class="space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="accent-bg text-white font-semibold py-3 px-8 rounded-lg text-lg hover:opacity-80 transition-opacity inline-block shadow-lg">Começar Agora</a>
+                <a href="#demonstracao" id="verDemoButton" class="border-2 accent-border accent-text font-semibold py-3 px-7 rounded-lg text-lg hover:accent-bg hover:text-white transition-colors inline-block shadow-lg">Ver Demonstração</a>
             </div>
         </div>
     </header>
@@ -466,40 +453,40 @@
                     <p class="card-text-secondary text-sm">Obtenha documentos, análises, estratégias ou qualquer outro recurso em segundos.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="demonstracao" class="py-16 md:py-24 section-bg-darker hidden">
-        <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="section-title">Experimente um Assistente!</h2>
-            <p class="text-center text-content-lighter mb-10 -mt-6 max-w-xl mx-auto">Veja como é fácil obter resultados. Selecione o assistente, forneça o contexto e veja a mágica acontecer (versão de demonstração).</p>
+            <div id="demonstracao" class="mt-16 md:mt-24 section-bg-darker p-6 md:p-10 rounded-xl shadow-2xl hidden">
+                <div class="max-w-3xl mx-auto">
+                    <h3 class="text-3xl font-bold text-white mb-3 text-center">Experimente um Assistente!</h3>
+                    <p class="text-center text-content-lighter mb-10 max-w-xl mx-auto">Veja como é fácil obter resultados. Selecione o assistente, forneça o contexto e veja a mágica acontecer (versão de demonstração).</p>
+                    
+                    <div class="card p-6 md:p-8" style="--card-bg-dynamic: var(--card-bg-alt-default);">
+                        <div class="mb-6">
+                            <label for="demoAssistenteSelect" class="block text-lg font-semibold card-text-primary mb-2">1. Escolha um Assistente para Demonstrar:</label>
+                            <select id="demoAssistenteSelect" class="w-full p-3 rounded-md demo-select focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+                                <option value="perguntasEntrevista" selected>Criar Perguntas de Entrevista (Recrutamento)</option>
+                                <option value="descricaoVaga" disabled>Gerar Descrição de Vaga (Recrutamento) - Em breve</option>
+                                <option value="planoOnboarding" disabled>Desenvolver Plano de Onboarding (Onboarding) - Em breve</option>
+                                <option value="analiseClima" disabled>Analisar Pesquisa de Clima (Clima Org.) - Em breve</option>
+                            </select>
+                        </div>
             
-            <div class="card p-6 md:p-8" style="--card-bg-dynamic: var(--card-bg-alt-default);">
-                <div class="mb-6">
-                    <label for="demoAssistenteSelect" class="block text-lg font-semibold card-text-primary mb-2">1. Escolha um Assistente para Demonstrar:</label>
-                    <select id="demoAssistenteSelect" class="w-full p-3 rounded-md demo-select focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
-                        <option value="perguntasEntrevista" selected>Criar Perguntas de Entrevista (Recrutamento)</option>
-                        <option value="descricaoVaga" disabled>Gerar Descrição de Vaga (Recrutamento) - Em breve</option>
-                        <option value="planoOnboarding" disabled>Desenvolver Plano de Onboarding (Onboarding) - Em breve</option>
-                        <option value="analiseClima" disabled>Analisar Pesquisa de Clima (Clima Org.) - Em breve</option>
-                    </select>
-                </div>
-    
-                <div class="mb-2">
-                    <label for="demoContextoInput" class="block text-lg font-semibold card-text-primary mb-2">2. Forneça o Contexto:</label>
-                    <textarea id="demoContextoInput" rows="8" class="w-full p-3 rounded-md demo-textarea focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none resize-none" placeholder="Preciso de perguntas de entrevista para um(a) Analista de Marketing Digital Pleno com foco em SEO/SEM, criação de conteúdo para redes sociais (Instagram, LinkedIn), análise de métricas de marketing digital, Google Analytics, Google Ads e ferramentas de automação de marketing. O candidato deve demonstrar proatividade, excelente comunicação escrita e verbal, capacidade analítica, criatividade e habilidade para trabalho em equipe. O nível de experiência esperado é 3 anos."></textarea>
-                </div>
-                <div class="mb-6 text-right">
-                    <button id="pasteExampleButton" class="btn-paste-example text-xs py-1 px-3 rounded-md hover:opacity-80 transition-opacity">Usar Exemplo Acima</button>
-                </div>
-    
-                <button id="gerarDemoButton" class="w-full accent-bg text-white font-bold py-3 px-6 rounded-lg hover:opacity-80 transition-opacity text-lg">
-                    Gerar Demonstração
-                </button>
-    
-                <div id="demoResultadoContainer" class="mt-8 p-6 border rounded-lg bg-opacity-30 hidden" style="border-color: var(--card-border-default); background-color: rgba(var(--bg-main-default-rgb, 26,0,43), 0.3);">
-                    <h4 class="text-xl font-semibold text-white mb-4">Resultado da Demonstração:</h4>
-                    <div id="demoResultadoOutput" class="text-content-light space-y-3 text-sm">
+                        <div class="mb-2">
+                            <label for="demoContextoInput" class="block text-lg font-semibold card-text-primary mb-2">2. Forneça o Contexto:</label>
+                            <textarea id="demoContextoInput" rows="8" class="w-full p-3 rounded-md demo-textarea focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none resize-none" placeholder="Preciso de perguntas de entrevista para um(a) Analista de Marketing Digital Pleno com foco em SEO/SEM, criação de conteúdo para redes sociais (Instagram, LinkedIn), análise de métricas de marketing digital, Google Analytics, Google Ads e ferramentas de automação de marketing. O candidato deve demonstrar proatividade, excelente comunicação escrita e verbal, capacidade analítica, criatividade e habilidade para trabalho em equipe. O nível de experiência esperado é 3 anos."></textarea>
+                        </div>
+                        <div class="mb-6 text-right">
+                            <button id="pasteExampleButton" class="btn-paste-example text-xs py-1 px-3 rounded-md hover:opacity-80 transition-opacity">Usar Exemplo Acima</button>
+                        </div>
+            
+                        <button id="gerarDemoButton" class="w-full accent-bg text-white font-bold py-3 px-6 rounded-lg hover:opacity-80 transition-opacity text-lg">
+                            Gerar Demonstração
+                        </button>
+            
+                        <div id="demoResultadoContainer" class="mt-8 p-6 border rounded-lg bg-opacity-30 hidden" style="border-color: var(--card-border-default); background-color: rgba(var(--bg-main-default-rgb, 26,0,43), 0.3);">
+                            <h4 class="text-xl font-semibold text-white mb-4">Resultado da Demonstração:</h4>
+                            <div id="demoResultadoOutput" class="text-content-light space-y-3 text-sm">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -582,8 +569,7 @@
             <div class="flex justify-center space-x-6 mb-6 text-sm">
                 <a href="#temas-overview" class="footer-link transition-colors">Temas</a>
                 <a href="#especialistas" class="footer-link transition-colors">Especialistas</a>
-                <a href="#demonstracao" class="footer-link transition-colors">Demonstração</a>
-                <a href="#como-usar" class="footer-link transition-colors">Como Usar</a>
+                <a href="#como-usar" class="footer-link transition-colors">Demonstração</a>
                 <a href="#planos" class="footer-link transition-colors">Planos</a>
                 <a href="#faq" class="footer-link transition-colors">FAQ</a>
             </div>
@@ -624,9 +610,10 @@
                 let sectionId = current.getAttribute('id');
                 
                 if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight){
-                   if (sectionId === 'demonstracao' && current.classList.contains('hidden')) {
-                       // Não ativa o link da demonstração se a seção estiver oculta
-                   } else {
+                   // Se a seção de demonstração está ativa E visível, o link ativo deve ser o de "Como Usar"
+                   if (sectionId === 'demonstracao' && !current.classList.contains('hidden')) {
+                       activeSectionId = 'como-usar';
+                   } else if (sectionId !== 'demonstracao' || (sectionId === 'demonstracao' && !current.classList.contains('hidden'))) {
                        activeSectionId = sectionId;
                    }
                 }
@@ -651,23 +638,37 @@
                     if (!mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                     }
-                    const targetId = this.getAttribute('href');
+                    const targetId = this.getAttribute('href'); // Ex: #como-usar
                     const targetElement = document.querySelector(targetId);
+
                     if (targetElement) {
-                        // Se for o link da demonstração e ela estiver oculta, primeiro a revela.
-                        if (targetId === '#demonstracao' && targetElement.classList.contains('hidden')) {
-                            targetElement.classList.remove('hidden');
+                        // Se o link clicado for "Demonstração" (que aponta para #como-usar),
+                        // e a seção de demonstração interativa estiver dentro de #como-usar,
+                        // precisamos garantir que a parte da demonstração seja revelada.
+                        const demoSectionInteractive = document.getElementById('demonstracao');
+                        if (targetId === '#como-usar' && demoSectionInteractive && demoSectionInteractive.classList.contains('hidden')) {
+                             // Não revela automaticamente aqui, o botão "Ver Demonstração" fará isso.
+                             // Apenas rola para o início da seção "Como Usar".
                         }
 
                         const navbarHeight = document.getElementById('navbar').offsetHeight;
-                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        let elementToScrollTo = targetElement;
+
+                        // Se o botão "Ver Demonstração" do hero for clicado, ele tem href="#demonstracao"
+                        // e o targetElement será a própria seção de demonstração.
+                        if (anchor.id === 'verDemoButton' && targetId === '#demonstracao') {
+                            if(demoSectionInteractive) demoSectionInteractive.classList.remove('hidden');
+                            elementToScrollTo = demoSectionInteractive; // Garante que role para a demo
+                        }
+
+
+                        const elementPosition = elementToScrollTo.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
                         
                         window.scrollTo({
                             top: offsetPosition,
                             behavior: "smooth"
                         });
-                        // Atualiza o estado ativo após o scroll
                         setTimeout(changeNavActiveState, 750); 
                     }
                 }
@@ -867,7 +868,7 @@
         }, false);
 
         const verDemoButton = document.getElementById('verDemoButton');
-        const demonstracaoSection = document.getElementById('demonstracao');
+        const demonstracaoSection = document.getElementById('demonstracao'); // Este é o contêiner da demo dentro de #como-usar
         const demoAssistenteSelect = document.getElementById('demoAssistenteSelect');
         const demoContextoInput = document.getElementById('demoContextoInput');
         const gerarDemoButton = document.getElementById('gerarDemoButton');
@@ -881,7 +882,9 @@
                 if (demonstracaoSection) {
                     demonstracaoSection.classList.remove('hidden');
                      const navbarHeight = document.getElementById('navbar').offsetHeight;
-                     const elementPosition = demonstracaoSection.getBoundingClientRect().top;
+                     // Rola para o início da seção #como-usar, mas a demo estará visível dentro dela.
+                     const comoUsarSection = document.getElementById('como-usar');
+                     const elementPosition = comoUsarSection.getBoundingClientRect().top;
                      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
                      window.scrollTo({
                          top: offsetPosition,
