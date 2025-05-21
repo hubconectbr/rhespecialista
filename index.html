@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH Assistentes | 50 Bots de IA para Profissionais de RH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1A002B; 
+            color: #E9D8FF; 
+        }
+        .hero-bg {
+            background-color: #2D0049; 
+        }
+        .primary-text { color: #FFFFFF; } 
+        .secondary-text { color: #D8BFD8; } 
+        .accent-bg { background-color: #FF00E5; } 
+        .accent-text { color: #FF00E5; }
+        .accent-border { border-color: #FF00E5; }
+        
+        .nav-bg { background-color: rgba(26, 0, 43, 0.85); } 
+        .nav-link-text { color: #E9D8FF; } 
+        .nav-link-text:hover { color: #FFFFFF; }
+
+        .card-bg { background-color: #25003D; } 
+        .card-text-primary { color: #FFFFFF; }
+        .card-text-secondary { color: #D8BFD8; }
+
+        .section-bg-light { background-color: #25003D; } 
+        .section-bg-darker { background-color: #12001F; } 
+
+        .section-title {
+            font-size: 2.25rem; 
+            line-height: 2.75rem;
+            font-weight: 800; 
+            color: #FFFFFF; 
+            margin-bottom: 2.5rem; 
+            text-align: center;
+        }
+        .card {
+            background-color: var(--card-bg, #25003D); 
+            border-radius: 0.75rem; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.15); 
+            padding: 1.5rem; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid #4A0072; 
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        .tema-card-overview { 
+            background-color: #30004C;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid #4A0072;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .tema-card-overview img {
+            width: 240px; 
+            height: 240px; 
+            object-fit: contain;
+            margin-bottom: 0.75rem;
+            border-radius: 0.25rem;
+        }
+         .tema-card-overview p {
+            font-size: 0.875rem; 
+            font-weight: 600; 
+            color: #E9D8FF;
+        }
+
+        .tema-card-detailed { 
+            padding: 1.5rem; 
+            background-color: #30004C; 
+        }
+        .mascote-img-container { 
+            width: 300px;  
+            height: 300px; 
+            border-radius: 0.5rem; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem; 
+            overflow: hidden;
+            border: 1px solid #5C2483;
+        }
+        .mascote-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .bot-specialist-card { 
+            background-color: #2D0049;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid #4A0072;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+        .bot-specialist-card img { 
+            width: 180px;  
+            height: 180px; 
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            border-radius: 0.25rem;
+        }
+        .bot-specialist-card p {
+            font-size: 0.875rem; 
+            color: #E9D8FF; 
+            margin-top: auto; 
+        }
+
+
+        .faq-item summary {
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #25003D; 
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #FFFFFF; 
+            border: 1px solid #4A0072;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+';
+            float: right;
+            font-size: 1.5rem;
+            transition: transform 0.2s ease-in-out;
+            color: #FF00E5;
+        }
+        .faq-item[open] summary::after { transform: rotate(45deg); }
+        .faq-item div { 
+            padding: 1rem;
+            background-color: #1A002B; 
+            border: 1px solid #4A0072;
+            border-top: none;
+            border-radius: 0 0 0.5rem 0.5rem;
+            color: #E9D8FF;
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--nav-bg, rgba(26, 0, 43, 0.9)); 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .text-content-light { color: #E9D8FF; } 
+        .text-content-lighter { color: #D8BFD8; } 
+        .text-green-600 { color: #34D399; } 
+
+        @keyframes levitate {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px); 
+            }
+        }
+        .levitating-mascot {
+            animation: levitate 3s ease-in-out infinite;
+        }
+
+        .floating-attendant {
+            position: fixed;
+            bottom: 30px; 
+            right: 30px;  
+            width: 180px; 
+            height: auto;
+            z-index: 1000; 
+            animation: floatAround 10s ease-in-out infinite; 
+            transition: transform 0.3s ease-out; 
+        }
+
+        @keyframes floatAround {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(-25px, -35px) rotate(-7deg); 
+            }
+            50% {
+                transform: translate(5px, -15px) rotate(3deg); 
+            }
+            75% {
+                transform: translate(25px, -35px) rotate(7deg); 
+            }
+        }
+        
+        .floating-attendant-top {
+            position: fixed;
+            top: 90px; 
+            left: 30px;
+            width: 160px; 
+            height: auto;
+            z-index: 1000;
+            animation: floatAroundTop 12s ease-in-out infinite; 
+            transition: transform 0.3s ease-out;
+        }
+
+        @keyframes floatAroundTop {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, 30px) rotate(6deg);
+            }
+            50% {
+                transform: translate(-5px, 10px) rotate(-2deg);
+            }
+            75% {
+                transform: translate(-20px, 30px) rotate(-6deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-attendant {
+                width: 120px; 
+                bottom: 15px;
+                right: 15px;
+            }
+            .floating-attendant-top {
+                width: 100px;
+                top: 80px;
+                left: 15px;
+            }
+        }
+        
+        .demo-select, .demo-textarea {
+            background-color: rgba(74, 0, 114, 0.5); 
+            border: 1px solid #4A0072; 
+            color: #E9D8FF; 
+        }
+        .demo-select:focus, .demo-textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #FF00E5; 
+            border-color: #FF00E5; 
+        }
+        .demo-resultado-output strong {
+            color: #FF00E5; 
+        }
+        .demo-resultado-output ul {
+            list-style-type: disc;
+            padding-left: 1.5rem; 
+        }
+        .btn-paste-example {
+            background-color: #4A0072;
+            color: #E9D8FF;
+            border: 1px solid #5C2483;
+        }
+        .btn-paste-example:hover {
+            background-color: #5C2483;
+        }
+
+
+    </style>
+    <!-- Visualization & Content Choices: 
+        - Hero: Text, CTAs. Goal: Inform, Engage. "Ver Demonstração" button style updated.
+        - Como Transforma: Cards with icons (Unicode). Goal: Inform.
+        - Visão Geral dos Temas: Grid of theme mascots and names. Goal: Navigate, Inform.
+        - Nossos Especialistas Detalhados: Sections for each of the 10 RH themes. Goal: Organize, Inform, Explore.
+        - Demonstração Interativa (NOVA): Dropdown for assistant choice, textarea for context (placeholder improved with example, added paste button), button to generate mock output. Goal: Engage, Demonstrate Value. Justification: Interactive way to show bot capability without real AI call.
+        - Como Usar: Numbered steps. Goal: Inform.
+        - Depoimentos: Cards. Goal: Build Trust.
+        - Planos: Comparison cards. Goal: Convert.
+        - FAQ: Accordion list. Goal: Inform, Overcome Objections.
+        - Floating Attendant(s): Images with CSS animation and JS scroll effect. Goal: Engage, Brand Reinforcement.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+</head>
+<body class="antialiased">
+
+    <nav id="navbar" class="sticky-nav py-3">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white">RH Assistentes</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#temas-overview" class="nav-link-text transition-colors">Temas</a>
+                <a href="#especialistas" class="nav-link-text transition-colors">Especialistas</a>
+                <a href="#demonstracao" class="nav-link-text transition-colors">Demonstração</a>
+                <a href="#como-usar" class="nav-link-text transition-colors">Como Usar</a>
+                <a href="#planos" class="nav-link-text transition-colors">Planos</a>
+                <a href="#faq" class="nav-link-text transition-colors">FAQ</a>
+            </div>
+            <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="hidden md:inline-block accent-bg text-white font-semibold py-2 px-5 rounded-lg hover:opacity-80 transition-opacity">Começar Agora</a>
+            <button id="mobileMenuButton" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-gray-800 bg-opacity-95 shadow-lg py-2">
+            <a href="#temas-overview" class="block px-4 py-2 nav-link-text hover:bg-gray-700">Temas</a>
+            <a href="#especialistas" class="block px-4 py-2 nav-link-text hover:bg-gray-700">Especialistas</a>
+            <a href="#demonstracao" class="block px-4 py-2 nav-link-text hover:bg-gray-700">Demonstração</a>
+            <a href="#como-usar" class="block px-4 py-2 nav-link-text hover:bg-gray-700">Como Usar</a>
+            <a href="#planos" class="block px-4 py-2 nav-link-text hover:bg-gray-700">Planos</a>
+            <a href="#faq" class="block px-4 py-2 nav-link-text hover:bg-gray-700">FAQ</a>
+            <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="block px-4 py-2 accent-bg text-white text-center mx-4 my-2 rounded-lg">Começar Agora</a>
+        </div>
+    </nav>
+
+    <header class="hero-bg text-white pt-20 pb-24 px-4">
+        <div class="container mx-auto text-center max-w-3xl">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">Transforme seu Departamento de RH</h1>
+            <p class="text-xl md:text-2xl mb-4 opacity-90">Delegue até 90% do seu trabalho para <strong class="accent-text">50 assistentes de IA</strong> especializados.</p>
+            <p class="text-lg mb-10 opacity-80">Um exército de especialistas em Recursos Humanos disponíveis 24/7 para automatizar processos, aumentar produtividade e reduzir custos.</p>
+            <div class="space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="accent-bg text-white font-semibold py-3 px-8 rounded-lg text-lg hover:opacity-80 transition-opacity inline-block shadow-lg">Começar Agora</a>
+                <a href="#demonstracao" id="verDemoButton" class="border-2 accent-border accent-text font-semibold py-3 px-7 rounded-lg text-lg hover:accent-bg hover:text-white transition-colors inline-block shadow-lg">Ver Demonstração</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="como-transforma" class="py-16 md:py-24 section-bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Como os Assistentes de IA Transformam seu RH</h2>
+            <p class="text-center text-content-lighter mb-12 max-w-2xl mx-auto">Automatize tarefas rotineiras, tome decisões baseadas em dados e foque no que realmente importa: as pessoas.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="text-3xl mb-3 accent-text">🎯</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Recrutamento Inteligente</h3>
+                    <p class="card-text-secondary text-sm">Analise currículos, crie descrições de vagas e prepare questões para entrevistas personalizadas em minutos.</p>
+                </div>
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="text-3xl mb-3 accent-text">🚀</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Onboarding Automatizado</h3>
+                    <p class="card-text-secondary text-sm">Gere materiais de integração personalizados, checklists e cronogramas para novos colaboradores.</p>
+                </div>
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="text-3xl mb-3 accent-text">📊</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Avaliação de Desempenho</h3>
+                    <p class="card-text-secondary text-sm">Crie formulários de avaliação, gere feedbacks construtivos e planos de desenvolvimento personalizados.</p>
+                </div>
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="text-3xl mb-3 accent-text">💡</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Treinamento & Desenvolvimento</h3>
+                    <p class="card-text-secondary text-sm">Desenvolva trilhas de aprendizagem, elabore planos de capacitação e avalie a eficácia dos treinamentos.</p>
+                </div>
+                <div class="card" style="--card-bg: #30004C;">
+                     <div class="text-3xl mb-3 accent-text">😊</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Clima Organizacional</h3>
+                    <p class="card-text-secondary text-sm">Elabore pesquisas de clima, analise resultados e desenvolva ações para melhorar o ambiente de trabalho.</p>
+                </div>
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="text-3xl mb-3 accent-text">🤝</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Gestão de Conflitos</h3>
+                    <p class="card-text-secondary text-sm">Obtenha roteiros para mediação, simule conversas difíceis e previna conflitos recorrentes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="temas-overview" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Navegue por Nossos Temas</h2>
+            <p class="text-center text-content-lighter mb-12 max-w-2xl mx-auto">Explore nossas 10 áreas de especialização em Gestão de Pessoas, cada uma com seu mascote dedicado.</p>
+            <div id="themesOverviewContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
+            </div>
+        </div>
+    </section>
+
+    <section id="especialistas" class="py-16 md:py-24 section-bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Nossos Especialistas Virtuais em Detalhe</h2>
+            <p class="text-center text-content-lighter mb-12 max-w-2xl mx-auto">Conheça os 5 bots especialistas dentro de cada um dos nossos 10 times de IA, prontos para otimizar suas tarefas.</p>
+            <div id="botsDetailedContainer" class="space-y-16">
+            </div>
+        </div>
+    </section>
+
+    <section id="como-usar" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Veja como é simples utilizar</h2>
+            <p class="text-center text-content-lighter mb-12 max-w-2xl mx-auto">Basta fornecer as informações básicas sobre sua necessidade e o assistente de IA fará todo o trabalho pesado para você.</p>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="accent-bg text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg">1</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Selecione o Tema</h3>
+                    <p class="card-text-secondary text-sm">Escolha a área de RH e o especialista virtual para sua tarefa.</p>
+                </div>
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="accent-bg text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg">2</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Forneça o Contexto</h3>
+                    <p class="card-text-secondary text-sm">Explique o que você precisa através de prompts simples ou use nossos templates.</p>
+                </div>
+                <div class="card" style="--card-bg: #30004C;">
+                    <div class="accent-bg text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg">3</div>
+                    <h3 class="text-xl font-semibold card-text-primary mb-2">Receba Resultados</h3>
+                    <p class="card-text-secondary text-sm">Obtenha documentos, análises, estratégias ou qualquer outro recurso em segundos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demonstracao" class="py-16 md:py-24 section-bg-darker hidden">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="section-title">Experimente um Assistente!</h2>
+            <p class="text-center text-content-lighter mb-10 -mt-6 max-w-xl mx-auto">Veja como é fácil obter resultados. Selecione o assistente, forneça o contexto e veja a mágica acontecer (versão de demonstração).</p>
+            
+            <div class="card p-6 md:p-8" style="--card-bg: #30004C;">
+                <div class="mb-6">
+                    <label for="demoAssistenteSelect" class="block text-lg font-semibold card-text-primary mb-2">1. Escolha um Assistente para Demonstrar:</label>
+                    <select id="demoAssistenteSelect" class="w-full p-3 rounded-md demo-select focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+                        <option value="perguntasEntrevista" selected>Criar Perguntas de Entrevista (Recrutamento)</option>
+                        <option value="descricaoVaga" disabled>Gerar Descrição de Vaga (Recrutamento) - Em breve</option>
+                        <option value="planoOnboarding" disabled>Desenvolver Plano de Onboarding (Onboarding) - Em breve</option>
+                        <option value="analiseClima" disabled>Analisar Pesquisa de Clima (Clima Org.) - Em breve</option>
+                    </select>
+                </div>
+    
+                <div class="mb-2">
+                    <label for="demoContextoInput" class="block text-lg font-semibold card-text-primary mb-2">2. Forneça o Contexto:</label>
+                    <textarea id="demoContextoInput" rows="8" class="w-full p-3 rounded-md demo-textarea focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none resize-none" placeholder="Preciso de perguntas de entrevista para um(a) Analista de Marketing Digital Pleno com foco em SEO/SEM, criação de conteúdo para redes sociais (Instagram, LinkedIn), análise de métricas de marketing digital, Google Analytics, Google Ads e ferramentas de automação de marketing. O candidato deve demonstrar proatividade, excelente comunicação escrita e verbal, capacidade analítica, criatividade e habilidade para trabalho em equipe. O nível de experiência esperado é 3 anos."></textarea>
+                </div>
+                <div class="mb-6 text-right">
+                    <button id="pasteExampleButton" class="btn-paste-example text-xs py-1 px-3 rounded-md hover:opacity-80 transition-opacity">Usar Exemplo Acima</button>
+                </div>
+    
+                <button id="gerarDemoButton" class="w-full accent-bg text-white font-bold py-3 px-6 rounded-lg hover:opacity-80 transition-opacity text-lg">
+                    Gerar Demonstração
+                </button>
+    
+                <div id="demoResultadoContainer" class="mt-8 p-6 border border-purple-700 rounded-lg bg-purple-900 bg-opacity-30 hidden">
+                    <h4 class="text-xl font-semibold text-white mb-4">Resultado da Demonstração:</h4>
+                    <div id="demoResultadoOutput" class="text-content-light space-y-3 text-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="py-16 md:py-24 section-bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">O que nossos clientes dizem</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card" style="--card-bg: #25003D;">
+                    <p class="card-text-secondary italic mb-4 text-sm">"A qualidade das avaliações de desempenho melhorou significativamente. Os assistentes nos ajudam a criar formulários personalizados e feedbacks construtivos para cada colaborador."</p>
+                    <p class="font-semibold card-text-primary">Carlos Mendes</p>
+                    <p class="text-xs text-content-lighter opacity-75">Gerente de RH, TechSolutions</p>
+                </div>
+                <div class="card" style="--card-bg: #25003D;">
+                    <p class="card-text-secondary italic mb-4 text-sm">"O onboarding de novos colaboradores se tornou muito mais eficiente. Criamos roteiros personalizados, materiais de integração e acompanhamos todo o processo de forma automatizada."</p>
+                    <p class="font-semibold card-text-primary">Juliana Costa</p>
+                    <p class="text-xs text-content-lighter opacity-75">Diretora de Pessoas, Fintech SA</p>
+                </div>
+                <div class="card" style="--card-bg: #25003D;">
+                    <p class="card-text-secondary italic mb-4 text-sm">"Reduzimos o tempo gasto em tarefas operacionais em mais de 50%! Agora podemos focar em estratégias para o desenvolvimento do nosso time."</p>
+                    <p class="font-semibold card-text-primary">Ana Silva</p>
+                    <p class="text-xs text-content-lighter opacity-75">Analista Sr. de RH, GloboRetail</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Escolha o plano ideal para sua empresa</h2>
+            <p class="text-center text-content-lighter mb-12 max-w-2xl mx-auto">Acesse 50 assistentes de IA especializados em RH e transforme a forma como sua equipe trabalha.</p>
+            <div class="flex flex-col lg:flex-row justify-center items-stretch gap-8">
+                <div class="card lg:w-1/3 border-2 border-transparent hover:accent-border" style="--card-bg: #30004C;">
+                    <h3 class="text-2xl font-semibold card-text-primary mb-2">Plano Mensal</h3>
+                    <p class="text-4xl font-bold card-text-primary mb-1">R$ 197<span class="text-lg font-normal text-content-lighter opacity-75">/mês</span></p>
+                    <p class="text-sm card-text-secondary mb-6">Acesso ilimitado aos 50 assistentes de IA. Cancele a qualquer momento.</p>
+                    <ul class="space-y-2 card-text-secondary text-sm mb-8 flex-grow">
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Acesso a todos os 50 assistentes</li>
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Uso ilimitado</li>
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Atualizações mensais de assistentes</li>
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Suporte por e-mail</li>
+                    </ul>
+                    <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="w-full block text-center bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-800 transition-colors">Assinar Agora</a>
+                </div>
+                <div class="card lg:w-1/3 border-2 accent-border relative" style="--card-bg: #30004C;">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <span class="accent-bg text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Mais Popular</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold card-text-primary mb-2">Plano Anual</h3>
+                    <p class="text-4xl font-bold card-text-primary mb-1">R$ 997<span class="text-lg font-normal text-content-lighter opacity-75">/ano</span></p>
+                    <p class="text-sm text-green-600 font-semibold mb-6">Economize 58% (R$ 1.367)!</p>
+                     <ul class="space-y-2 card-text-secondary text-sm mb-8 flex-grow">
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Acesso a todos os 50 assistentes</li>
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Uso ilimitado</li>
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Atualizações mensais de assistentes</li>
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Suporte prioritário</li>
+                        <li class="flex items-center"><span class="accent-text mr-2">✔</span>Treinamento exclusivo em webinars</li>
+                    </ul>
+                    <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="w-full block text-center accent-bg text-white font-semibold py-3 px-6 rounded-lg hover:opacity-80 transition-opacity">Assinar Agora</a>
+                </div>
+            </div>
+            <p class="text-center text-sm text-content-lighter mt-8">Garantia de 7 dias. Se você não ficar satisfeito, devolvemos seu dinheiro.</p>
+        </div>
+    </section>
+
+    <section id="faq" class="py-16 md:py-24 section-bg-light">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="space-y-4" id="faqContainer">
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-bg-darker text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-semibold mb-4 text-white">RH Assistentes</h3>
+            <p class="mb-6 text-gray-400">Transformando o trabalho de RH com inteligência artificial avançada.</p>
+            <div class="flex justify-center space-x-6 mb-6 text-sm">
+                <a href="#temas-overview" class="hover:accent-text transition-colors">Temas</a>
+                <a href="#especialistas" class="hover:accent-text transition-colors">Especialistas</a>
+                <a href="#demonstracao" class="hover:accent-text transition-colors">Demonstração</a>
+                <a href="#como-usar" class="hover:accent-text transition-colors">Como Usar</a>
+                <a href="#planos" class="hover:accent-text transition-colors">Planos</a>
+                <a href="#faq" class="hover:accent-text transition-colors">FAQ</a>
+            </div>
+            <div class="text-xs text-gray-500">
+                <a href="#" class="hover:text-gray-300">Termos de Uso</a> | 
+                <a href="#" class="hover:text-gray-300">Política de Privacidade</a> | 
+                <a href="#" class="hover:text-gray-300">Cookies</a> | 
+                <a href="#" class="hover:text-gray-300">LGPD</a>
+            </div>
+            <p class="text-xs text-gray-500 mt-6">&copy; <span id="currentYear"></span> RH Assistentes. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <img src="imagens/atendente_rhespecialista.png" alt="Atendente RH Especialista Flutuante" id="floatingAttendantBottom" class="floating-attendant">
+    <img src="imagens/atendente_rhespecialista_2.png" alt="Atendente RH Especialista Flutuante Topo" id="floatingAttendantTop" class="floating-attendant-top">
+
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        document.querySelectorAll('#mobileMenu a, nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const navbarHeight = document.getElementById('navbar').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+            });
+        });
+
+        const rhData = [
+            {
+                area: "Recrutamento e Seleção",
+                imagemMascote: "imagens/Mascote_Tema_1_Recrutamento_e_Selecao_RECRUTT.png", 
+                nomeMascote: "RECRUTT",
+                descricao: "Especialistas em otimizar todo o seu funil de contratação, da atração à admissão.",
+                bots: [
+                    { nome: "Criador de Job Descriptions Otimizadas" }, { nome: "Analisador Inteligente de Currículos" },
+                    { nome: "Gerador de Perguntas Comportamentais" }, { nome: "Assistente de Triagem Inicial" },
+                    { nome: "Consultor de Employer Branding" }
+                ]
+            },
+            {
+                area: "Onboarding e Integração",
+                imagemMascote: "imagens/Mascote_Tema_2_Onboarding_e_Integracao_ONBOR.png",
+                nomeMascote: "ONBOR",
+                descricao: "Ferramentas para integrar novos colaboradores de forma eficiente, engajadora e acolhedora.",
+                bots: [
+                    { nome: "Planejador de Jornada de Integração" }, { nome: "Criador de Kits de Boas-vindas Digitais" },
+                    { nome: "Gerador de Checklists de Onboarding" }, { nome: "Redator de E-mails de Acompanhamento" },
+                    { nome: "Assistente de Apresentação da Cultura" }
+                ]
+            },
+            {
+                area: "Avaliação de Desempenho",
+                imagemMascote: "imagens/Mascote_Tema_3_Avaliacao_de_Desempenho_PERFORMY.png",
+                nomeMascote: "PERFORMY",
+                descricao: "Assistentes para criar, conduzir e analisar avaliações de desempenho de forma justa e eficaz.",
+                bots: [
+                    { nome: "Designer de Formulários 90/180/360°" }, { nome: "Gerador de Feedback Baseado em Metas" },
+                    { nome: "Elaborador de Planos de Desenvolvimento (PDI)" }, { nome: "Analisador de Tendências de Performance" },
+                    { nome: "Consultor de Calibração de Avaliações" }
+                ]
+            },
+            {
+                area: "Desenvolvimento e Capacitação",
+                imagemMascote: "imagens/Mascote_Tema_4_Bloco_4_Desenvolvimento_e_Capacitacao_DEVY.png",
+                nomeMascote: "DEVY",
+                descricao: "Ferramentas para criar programas de treinamento impactantes e mensurar o desenvolvimento.",
+                bots: [
+                    { nome: "Arquiteto de Trilhas de Aprendizagem Personalizadas" }, { nome: "Consultor de Levantamento de Necessidades (LNT)" },
+                    { nome: "Criador de Conteúdo para Microlearning" }, { nome: "Avaliador de Eficácia de Treinamento" },
+                    { nome: "Curador de Plataformas e Recursos Educacionais" }
+                ]
+            },
+            {
+                area: "Clima Organizacional",
+                imagemMascote: "imagens/Mascote_Tema_5_Clima_Organizacional_HUMO.png",
+                nomeMascote: "HUMO",
+                descricao: "Assistentes para medir, analisar e propor ações para um ambiente de trabalho positivo e produtivo.",
+                bots: [
+                    { nome: "Criador de Pesquisas de Clima e Engajamento" }, { nome: "Analisador de Sentimentos em Comentários" },
+                    { nome: "Gerador de Planos de Ação para Clima" }, { nome: "Consultor de Programas de Bem-Estar" },
+                    { nome: "Facilitador de Grupos Focais Virtuais" }
+                ]
+            },
+            {
+                area: "Gestão de Conflitos",
+                imagemMascote: "imagens/Mascote_Tema_6_Gestao_de_Conflitos_CONFLIX.png",
+                nomeMascote: "CONFLIX",
+                descricao: "Recursos para mediação, simulação de conversas difíceis e estratégias de prevenção de conflitos.",
+                bots: [
+                    { nome: "Mediador Virtual para Resolução de Disputas" }, { nome: "Simulador de Cenários de Conversas Difíceis" },
+                    { nome: "Analista de Padrões de Conflito Recorrentes" }, { nome: "Consultor de Políticas de Prevenção" },
+                    { nome: "Gerador de Roteiros para Mediação" }
+                ]
+            },
+            {
+                area: "Comunicação Interna",
+                imagemMascote: "imagens/Mascote_Tema_7_Comunicacao_Interna_COMM.png",
+                nomeMascote: "COMM",
+                descricao: "Ferramentas para criar e disseminar comunicações internas eficazes, claras e adaptadas.",
+                bots: [
+                    { nome: "Planejador de Campanhas de Comunicação Interna" }, { nome: "Redator de Comunicados e Anúncios Oficiais" },
+                    { nome: "Criador de Newsletters Internas Engajadoras" }, { nome: "Adaptador de Tom de Voz para Diferentes Públicos" },
+                    { nome: "Analisador de Métricas de Comunicação" }
+                ]
+            },
+            {
+                area: "Processos Administrativos de RH",
+                imagemMascote: "imagens/Mascote_Tema_8_Processos_Administrativos_de_RH_ADMIN.png",
+                nomeMascote: "ADMIN",
+                descricao: "Assistentes para automatizar e otimizar as rotinas administrativas do departamento de RH.",
+                bots: [
+                    { nome: "Gerenciador de Folhas de Ponto e Férias" }, { nome: "Organizador de Documentação de Colaboradores" },
+                    { nome: "Assistente de Benefícios e Reembolsos" }, { nome: "Gerador de Relatórios de Headcount e Turnover" },
+                    { nome: "Consultor de Conformidade Trabalhista (LGPD)" }
+                ]
+            },
+            {
+                area: "Diversidade e Inclusão",
+                imagemMascote: "imagens/Mascote_Tema_9_Diversidade_e_Inclusao_INCLUD.png",
+                nomeMascote: "INCLUD",
+                descricao: "Ferramentas para promover um ambiente de trabalho mais diverso, equitativo e inclusivo.",
+                bots: [
+                    { nome: "Analisador de Viés em Processos de RH" }, { nome: "Criador de Programas de Sensibilização em D&I" },
+                    { nome: "Consultor para Políticas de Inclusão" }, { nome: "Gerador de Conteúdo Inclusivo e Acessível" },
+                    { nome: "Facilitador de Comitês de Diversidade" }
+                ]
+            },
+            {
+                area: "Desligamentos e Offboarding",
+                imagemMascote: "imagens/Mascote_Tema_10_Desligamentos_e_Offboarding.png", 
+                nomeMascote: "OFFBOR",
+                descricao: "Assistentes para conduzir processos de desligamento humanizados e eficientes.",
+                bots: [
+                    { nome: "Planejador de Entrevistas de Desligamento" }, { nome: "Gerador de Documentação de Rescisão" },
+                    { nome: "Criador de Roteiros para Comunicação de Desligamento" }, { nome: "Consultor de Programas de Outplacement" },
+                    { nome: "Organizador de Checklists de Offboarding" }
+                ]
+            }
+        ];
+
+        const themesOverviewContainer = document.getElementById('themesOverviewContainer');
+        rhData.forEach((tema) => { 
+            const overviewCard = document.createElement('div');
+            overviewCard.className = 'tema-card-overview flex flex-col items-center';
+            
+            overviewCard.innerHTML = `
+                <img src="${tema.imagemMascote}" alt="Mascote ${tema.nomeMascote}" class="mx-auto levitating-mascot">
+                <p class="mt-2">${tema.area}</p>
+            `;
+            themesOverviewContainer.appendChild(overviewCard);
+        });
+
+        const botsDetailedContainer = document.getElementById('botsDetailedContainer');
+        rhData.forEach(tema => {
+            const temaDetailedCard = document.createElement('div');
+            temaDetailedCard.className = 'card tema-card-detailed'; 
+            
+            let botsSpecialistsHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-4">';
+            tema.bots.forEach(bot => {
+                botsSpecialistsHTML += `
+                    <div class="bot-specialist-card">
+                        <img src="${tema.imagemMascote}" alt="Especialista ${bot.nome} - Mascote ${tema.nomeMascote}">
+                        <p>${bot.nome}</p>
+                    </div>
+                `;
+            });
+            botsSpecialistsHTML += '</div>';
+
+            temaDetailedCard.innerHTML = `
+                <div class="text-center mb-6">
+                    <div class="mascote-img-container mx-auto">
+                        <img src="${tema.imagemMascote}" alt="Mascote ${tema.nomeMascote}">
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">${tema.area}</h3>
+                    <p class="text-sm text-content-lighter max-w-md mx-auto">${tema.descricao}</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-3 text-center">Nossos 5 Especialistas Virtuais:</h4>
+                    ${botsSpecialistsHTML}
+                </div>
+            `;
+            botsDetailedContainer.appendChild(temaDetailedCard);
+        });
+
+        const faqs = [
+            { q: "O que são os assistentes de IA para RH?", a: "São ferramentas de inteligência artificial especializadas em diversas tarefas de Recursos Humanos, projetadas para automatizar processos, otimizar o tempo e fornecer insights valiosos para profissionais de RH." },
+            { q: "Preciso ter conhecimento em IA para utilizar os assistentes?", a: "Não! Nossos assistentes são projetados para serem intuitivos e fáceis de usar. Você interage com eles através de prompts simples em linguagem natural ou utilizando nossos templates pré-definidos." },
+            { q: "Quais são os benefícios de usar IA no departamento de RH?", a: "Aumento de produtividade, redução de custos operacionais, otimização de processos como recrutamento e onboarding, tomada de decisões mais estratégicas baseadas em dados, e mais tempo para focar no desenvolvimento e bem-estar das pessoas." },
+            { q: "Como os assistentes se adaptam ao meu negócio?", a: "Os assistentes são flexíveis e podem ser direcionados através dos seus prompts para se alinharem com a cultura, o tom de voz e as necessidades específicas da sua empresa. Muitos permitem a personalização de templates e fluxos." },
+            { q: "Como garantir a privacidade dos dados da minha empresa?", a: "Levamos a segurança e a privacidade dos dados muito a sério. Utilizamos protocolos de segurança robustos e seguimos as melhores práticas para proteger todas as informações processadas pelos nossos assistentes. Consulte nossa Política de Privacidade para mais detalhes." },
+            { q: "Posso cancelar minha assinatura a qualquer momento?", a: "Sim, para o plano mensal, você pode cancelar sua assinatura a qualquer momento, sem taxas adicionais. O acesso permanecerá ativo até o final do período já pago." }
+        ];
+
+        const faqContainer = document.getElementById('faqContainer');
+        faqs.forEach(faq => {
+            const faqItem = document.createElement('details');
+            faqItem.className = 'faq-item shadow-sm';
+            faqItem.innerHTML = `
+                <summary>${faq.q}</summary>
+                <div>
+                    <p>${faq.a}</p>
+                </div>
+            `;
+            faqContainer.appendChild(faqItem);
+        });
+
+        const floatingAttendantBottom = document.getElementById('floatingAttendantBottom');
+        const floatingAttendantTop = document.getElementById('floatingAttendantTop');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (floatingAttendantBottom) {
+                floatingAttendantBottom.style.transform = `translateY(${scrollTop * 0.05}px)`; 
+            }
+            if (floatingAttendantTop) {
+                floatingAttendantTop.style.transform = `translateY(${scrollTop * -0.03}px)`; 
+            }
+        }, false);
+
+        const verDemoButton = document.getElementById('verDemoButton');
+        const demonstracaoSection = document.getElementById('demonstracao');
+        const demoAssistenteSelect = document.getElementById('demoAssistenteSelect');
+        const demoContextoInput = document.getElementById('demoContextoInput');
+        const gerarDemoButton = document.getElementById('gerarDemoButton');
+        const demoResultadoContainer = document.getElementById('demoResultadoContainer');
+        const demoResultadoOutput = document.getElementById('demoResultadoOutput');
+        const pasteExampleButton = document.getElementById('pasteExampleButton');
+
+        if (verDemoButton) {
+            verDemoButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (demonstracaoSection) {
+                    demonstracaoSection.classList.remove('hidden');
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+                    const elementPosition = demonstracaoSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        }
+
+        if (pasteExampleButton && demoContextoInput) {
+            pasteExampleButton.addEventListener('click', function() {
+                demoContextoInput.value = demoContextoInput.placeholder;
+            });
+        }
+
+        if (gerarDemoButton) {
+            gerarDemoButton.addEventListener('click', function() {
+                const selectedAssistant = demoAssistenteSelect.value;
+                const contexto = demoContextoInput.value.trim();
+                let outputHTML = '';
+
+                if (selectedAssistant === 'perguntasEntrevista') {
+                    if (!contexto) {
+                        outputHTML = '<p class="accent-text">Por favor, forneça o contexto para gerar as perguntas.</p>';
+                    } else {
+                        let cargo = "Cargo não especificado";
+                        let detalhes = contexto;
+
+                        const cargoMatch = contexto.match(/Cargo:\s*(.*?)(\n|$)/i);
+                        if (cargoMatch && cargoMatch[1]) {
+                            cargo = cargoMatch[1].trim();
+                        }
+                        
+                        const perfilMatch = contexto.match(/Perfil Desejado:\s*(.*)/is); 
+                        if (perfilMatch && perfilMatch[1]) {
+                            detalhes = perfilMatch[1].trim();
+                        } else {
+                            const cargoIndex = contexto.toLowerCase().indexOf("cargo:");
+                            if (cargoIndex !== -1) {
+                                const firstLineEnd = contexto.indexOf("\n", cargoIndex);
+                                if (firstLineEnd !== -1) {
+                                    const restOfText = contexto.substring(firstLineEnd + 1).trim();
+                                    if (restOfText) detalhes = restOfText;
+                                } else if (contexto.length > (cargoIndex + "cargo:".length + cargo.length)) {
+                                     detalhes = contexto.substring(cargoIndex + "cargo:".length + cargo.length).trim();
+                                }
+                            }
+                        }
+                        
+                        outputHTML = `
+                            <p class="mb-3"><strong>Perguntas de Entrevista para ${cargo}:</strong></p>
+                            <p class="text-xs text-content-lighter opacity-75 mb-3"><em>Com base no perfil: ${detalhes.replace(/\n/g, '<br>')}</em></p>
+                            
+                            <strong class="block mt-2 mb-1 accent-text">Perguntas Comportamentais:</strong>
+                            <ul class="list-disc list-inside ml-4 space-y-1 text-sm">
+                                <li>Descreva uma situação desafiadora que você enfrentou em um projeto anterior e como você a superou.</li>
+                                <li>Como você lida com prazos apertados e múltiplas prioridades? Dê um exemplo.</li>
+                                <li>Fale sobre uma vez que você teve que trabalhar em equipe para alcançar um objetivo complexo. Qual foi o seu papel?</li>
+                            </ul>
+                            
+                            <strong class="block mt-3 mb-1 accent-text">Perguntas Técnicas (Exemplos):</strong>
+                            <ul class="list-disc list-inside ml-4 space-y-1 text-sm">
+                                <li>Quais ferramentas ou metodologias você considera essenciais para a função de ${cargo}?</li>
+                                <li>Como você se mantém atualizado com as novas tendências e tecnologias relevantes para esta área?</li>
+                                <li>Poderia explicar um conceito técnico chave relacionado a uma das competências mencionadas no perfil?</li>
+                            </ul>
+
+                            <strong class="block mt-3 mb-1 accent-text">Perguntas Situacionais:</strong>
+                            <ul class="list-disc list-inside ml-4 space-y-1 text-sm">
+                                <li>Imagine que você recebe um feedback construtivo sobre seu trabalho. Como você reagiria e quais passos tomaria?</li>
+                                <li>Se você identificasse uma oportunidade de melhoria em um processo existente na equipe, como você a apresentaria aos seus colegas e liderança?</li>
+                            </ul>
+                            <p class="mt-4 text-xs text-gray-500">Este é um exemplo de resultado. Nossos assistentes completos fornecem análises e conteúdos ainda mais detalhados e personalizados!</p>
+                        `;
+                    }
+                } else {
+                    outputHTML = '<p>Demonstração para este assistente ainda não disponível.</p>';
+                }
+
+                demoResultadoOutput.innerHTML = outputHTML;
+                demoResultadoContainer.classList.remove('hidden');
+            });
+        }
+
+    </script>
+</body>
+</html>
