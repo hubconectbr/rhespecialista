@@ -83,16 +83,12 @@
             background-image: linear-gradient(var(--bg-hero-overlay-start-default), var(--bg-hero-overlay-end-default)), url('imagens/imagem_padrao_pagina_principal.png');
             background-size: cover;
             background-position: center;
-            min-height: clamp(400px, 70vh, 800px); /* Altura responsiva com mínimo e máximo */
+            min-height: clamp(450px, 70vh, 800px); 
             display: flex;
             align-items: center; 
             justify-content: center; 
-            padding-top: 5rem; /* Espaço para o nav */
+            padding-top: 5rem; 
             padding-bottom: 3rem;
-        }
-
-        .hero-content {
-            z-index: 10; 
         }
 
         .primary-text { color: var(--text-primary-default); } 
@@ -274,7 +270,7 @@
         }
 
         @media (max-width: 768px) {
-            #hero-main { min-height: 50vh; }
+            #hero-main .hero-content { text-align: center; padding: 2rem 1rem; } /* Ajuste para centralizar em mobile */
             .floating-attendant { width: 120px; bottom: 15px; right: 15px; }
             .floating-attendant-top { width: 100px; top: 80px; left: 15px; }
         }
@@ -325,7 +321,7 @@
 
     </style>
     <!-- Visualization & Content Choices: 
-        - Hero: Text over full-width background image. Goal: Inform, Engage, Visual Appeal.
+        - Hero: Text overlay on full-width background image. Goal: Inform, Engage, Visual Appeal.
         - Demo section moved into "Como Usar". Nav link "Demonstração" now points to "Como Usar".
         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
@@ -364,13 +360,13 @@
     </nav>
 
     <header id="hero-main" class="text-white px-4 relative">
-        <div class="hero-content container mx-auto text-center max-w-3xl">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight primary-text">Transforme seu Departamento de RH</h1>
-            <p class="text-xl md:text-2xl mb-4 opacity-90 text-secondary-default">Delegue até 90% do seu trabalho para <strong class="accent-text">50 assistentes de IA</strong> especializados.</p>
+        <div class="container mx-auto hero-content text-center md:text-left md:max-w-xl lg:max-w-2xl">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight primary-text">Transforme seu Departamento de RH</h1>
+            <p class="text-xl sm:text-2xl mb-4 opacity-90 text-secondary-default">Delegue até 90% do seu trabalho para <strong class="accent-text">50 assistentes de IA</strong> especializados.</p>
             <p class="text-lg mb-10 opacity-80 text-secondary-default">Um exército de especialistas em Recursos Humanos disponíveis 24/7 para automatizar processos, aumentar produtividade e reduzir custos.</p>
             <div class="space-y-4 sm:space-y-0 sm:space-x-4">
                 <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="accent-bg text-white font-semibold py-3 px-8 rounded-lg text-lg hover:opacity-80 transition-opacity inline-block shadow-lg">Começar Agora</a>
-                <a href="#demonstracao" id="verDemoButton" class="border-2 accent-border accent-text font-semibold py-3 px-7 rounded-lg text-lg hover:accent-bg hover:text-white transition-colors inline-block shadow-lg">Ver Demonstração</a>
+                <a href="#como-usar" id="verDemoButton" class="border-2 accent-border accent-text font-semibold py-3 px-7 rounded-lg text-lg hover:accent-bg hover:text-white transition-colors inline-block shadow-lg">Ver Demonstração</a>
             </div>
         </div>
     </header>
@@ -603,6 +599,7 @@
             let scrollY = window.pageYOffset;
             const navbarHeight = document.getElementById('navbar').offsetHeight;
             let activeSectionId = null;
+            const demoInteractiveSection = document.getElementById('demonstracao');
 
             sections.forEach(current => {
                 const sectionHeight = current.offsetHeight;
@@ -610,14 +607,18 @@
                 let sectionId = current.getAttribute('id');
                 
                 if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight){
-                   // Se a seção de demonstração está ativa E visível, o link ativo deve ser o de "Como Usar"
-                   if (sectionId === 'demonstracao' && !current.classList.contains('hidden')) {
-                       activeSectionId = 'como-usar';
-                   } else if (sectionId !== 'demonstracao' || (sectionId === 'demonstracao' && !current.classList.contains('hidden'))) {
-                       activeSectionId = sectionId;
-                   }
+                   activeSectionId = sectionId;
                 }
             });
+
+            // Se a seção de demonstração interativa estiver visível, o link "Demonstração" (que aponta para #como-usar) deve ser o ativo.
+            if (demoInteractiveSection && !demoInteractiveSection.classList.contains('hidden')) {
+                 const comoUsarSectionTop = document.getElementById('como-usar').offsetTop - navbarHeight - 50;
+                 const comoUsarSectionHeight = document.getElementById('como-usar').offsetHeight;
+                 if (scrollY >= comoUsarSectionTop && scrollY <= comoUsarSectionTop + comoUsarSectionHeight) {
+                    activeSectionId = 'como-usar';
+                 }
+            }
             
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -638,31 +639,20 @@
                     if (!mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                     }
-                    const targetId = this.getAttribute('href'); // Ex: #como-usar
+                    const targetId = this.getAttribute('href'); 
                     const targetElement = document.querySelector(targetId);
 
                     if (targetElement) {
-                        // Se o link clicado for "Demonstração" (que aponta para #como-usar),
-                        // e a seção de demonstração interativa estiver dentro de #como-usar,
-                        // precisamos garantir que a parte da demonstração seja revelada.
                         const demoSectionInteractive = document.getElementById('demonstracao');
-                        if (targetId === '#como-usar' && demoSectionInteractive && demoSectionInteractive.classList.contains('hidden')) {
-                             // Não revela automaticamente aqui, o botão "Ver Demonstração" fará isso.
-                             // Apenas rola para o início da seção "Como Usar".
+                        
+                        if (anchor.id === 'verDemoButton' && targetId === '#como-usar') { // Botão "Ver Demonstração" agora aponta para #como-usar
+                            if (demoSectionInteractive) {
+                                demoSectionInteractive.classList.remove('hidden');
+                            }
                         }
 
                         const navbarHeight = document.getElementById('navbar').offsetHeight;
-                        let elementToScrollTo = targetElement;
-
-                        // Se o botão "Ver Demonstração" do hero for clicado, ele tem href="#demonstracao"
-                        // e o targetElement será a própria seção de demonstração.
-                        if (anchor.id === 'verDemoButton' && targetId === '#demonstracao') {
-                            if(demoSectionInteractive) demoSectionInteractive.classList.remove('hidden');
-                            elementToScrollTo = demoSectionInteractive; // Garante que role para a demo
-                        }
-
-
-                        const elementPosition = elementToScrollTo.getBoundingClientRect().top;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
                         
                         window.scrollTo({
@@ -868,7 +858,7 @@
         }, false);
 
         const verDemoButton = document.getElementById('verDemoButton');
-        const demonstracaoSection = document.getElementById('demonstracao'); // Este é o contêiner da demo dentro de #como-usar
+        const demonstracaoContainer = document.getElementById('demonstracao'); 
         const demoAssistenteSelect = document.getElementById('demoAssistenteSelect');
         const demoContextoInput = document.getElementById('demoContextoInput');
         const gerarDemoButton = document.getElementById('gerarDemoButton');
@@ -879,12 +869,11 @@
         if (verDemoButton) {
             verDemoButton.addEventListener('click', function(e) {
                 e.preventDefault();
-                if (demonstracaoSection) {
-                    demonstracaoSection.classList.remove('hidden');
+                const comoUsarSection = document.getElementById('como-usar');
+                if (demonstracaoContainer && comoUsarSection) {
+                    demonstracaoContainer.classList.remove('hidden');
                      const navbarHeight = document.getElementById('navbar').offsetHeight;
-                     // Rola para o início da seção #como-usar, mas a demo estará visível dentro dela.
-                     const comoUsarSection = document.getElementById('como-usar');
-                     const elementPosition = comoUsarSection.getBoundingClientRect().top;
+                     const elementPosition = comoUsarSection.getBoundingClientRect().top; 
                      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
                      window.scrollTo({
                          top: offsetPosition,
