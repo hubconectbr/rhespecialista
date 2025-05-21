@@ -12,7 +12,7 @@
             
             /* Tema Padrão (Roxo/Rosa - Sol ☀️) */
             --bg-main-default: #1A002B;
-            --bg-hero-default: #2D0049;
+            --bg-hero-default: #2D0049; 
             --text-primary-default: #FFFFFF;
             --text-secondary-default: #E9D8FF;
             --text-lighter-default: #D8BFD8;
@@ -22,7 +22,7 @@
             --nav-bg-default: rgba(26, 0, 43, 0.85);
             --nav-link-text-default: #E9D8FF;
             --nav-link-hover-default: #FFFFFF;
-            --nav-link-active-text-default: #FF00E5; /* Cor para link ativo */
+            --nav-link-active-text-default: #FF00E5; 
             --card-bg-default: #25003D;
             --card-bg-alt-default: #30004C; 
             --card-border-default: #4A0072;
@@ -38,7 +38,6 @@
             --btn-paste-text-default: #E9D8FF;
             --btn-paste-hover-bg-default: #5C2483;
             --text-green-positive: #34D399;
-            --image-separator-bg: var(--bg-hero-default); /* Fundo para a seção da imagem separadora */
         }
 
         [data-theme="grafite"] {
@@ -53,7 +52,7 @@
             --nav-bg-default: rgba(23, 26, 74, 0.85); 
             --nav-link-text-default: #D1D5DB;
             --nav-link-hover-default: #FFFFFF;
-            --nav-link-active-text-default: #FF00E5; /* Cor para link ativo no tema grafite */
+            --nav-link-active-text-default: #FF00E5; 
             --card-bg-default: #2f2c79; 
             --card-bg-alt-default: #171a4a; 
             --card-border-default: #4338CA; 
@@ -69,7 +68,6 @@
             --btn-paste-text-default: #FFFFFF;
             --btn-paste-hover-bg-default: #3730A3; 
             --text-green-positive: #10B981; 
-            --image-separator-bg: var(--bg-hero-default);
         }
 
         body {
@@ -78,9 +76,30 @@
             color: var(--text-secondary-default); 
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .hero-bg {
-            background-color: var(--bg-hero-default); 
+        
+        #hero-main {
+            background-color: var(--bg-hero-default);
+            min-height: 250px; /* Altura mínima absoluta */
+            /* Ajuste a altura da viewport conforme necessário, pode ser maior para dar mais espaço à imagem */
+            /* min-height: clamp(250px, 60vh, 700px);  Uma forma de controlar altura mínima e máxima */
+            display: flex; /* Alterado para flex */
+            overflow: hidden; /* Para conter a imagem se ela for maior que o contêiner */
         }
+
+        .hero-content {
+            z-index: 10; /* Para garantir que o texto fique sobre qualquer overlay futuro */
+        }
+        .hero-image-container {
+            height: 100%; /* Para a imagem tentar preencher a altura do hero */
+        }
+         .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Para cobrir o espaço do contêiner, pode cortar */
+            object-position: center; /* Centraliza a imagem no corte */
+        }
+
+
         .primary-text { color: var(--text-primary-default); } 
         .secondary-text { color: var(--text-secondary-default); } 
         .accent-bg { background-color: var(--accent-bg-default); } 
@@ -260,6 +279,9 @@
         }
 
         @media (max-width: 768px) {
+            #hero-main { flex-direction: column; min-height: auto; } /* Empilha em telas pequenas */
+            .hero-content { text-align: center; padding-bottom: 2rem; }
+            .hero-image-container { width: 100%; max-height: 300px; } /* Ajusta imagem em mobile */
             .floating-attendant { width: 120px; bottom: 15px; right: 15px; }
             .floating-attendant-top { width: 100px; top: 80px; left: 15px; }
         }
@@ -308,32 +330,9 @@
         .footer-text { color: var(--footer-text-default); }
         .footer-link:hover { color: var(--footer-link-hover-default); }
 
-        #image-separator {
-            background-color: var(--image-separator-bg);
-            padding: 0; /* Remover padding se a imagem for cobrir tudo */
-            line-height: 0; /* Para remover espaço extra se a imagem for inline-block */
-        }
-        #image-separator img {
-            width: 100%;
-            height: auto; /* Manter proporção */
-            max-height: 300px; /* Limitar altura máxima para não ficar muito grande */
-            object-fit: cover; /* Cobrir a área, pode cortar um pouco da imagem */
-        }
-
     </style>
     <!-- Visualization & Content Choices: 
-        - Theme Switcher: Buttons with Sun/Moon icons in Nav. Goal: User Preference.
-        - Hero: Text, CTAs. Goal: Inform, Engage.
-        - Image Separator (NOVA): Full-width responsive image. Goal: Visual Appeal, Brand Reinforcement, Section Transition.
-        - Como Transforma: Cards with icons (Unicode). Goal: Inform.
-        - Visão Geral dos Temas: Grid of theme mascots and names. Goal: Navigate, Inform.
-        - Nossos Especialistas Detalhados: Sections for each of the 10 RH themes. Goal: Organize, Inform, Explore.
-        - Demonstração Interativa: Dropdown, textarea, mock output. Goal: Engage, Demonstrate Value.
-        - Como Usar: Numbered steps. Goal: Inform.
-        - Depoimentos: Cards. Goal: Build Trust.
-        - Planos: Comparison cards. Goal: Convert.
-        - FAQ: Accordion list. Goal: Inform, Overcome Objections.
-        - Floating Attendant(s): Images with CSS animation and JS scroll effect. Goal: Engage, Brand Reinforcement.
+        - Hero: Text left, image right. Goal: Inform, Engage, Visual Appeal.
         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
 </head>
@@ -372,22 +371,22 @@
         </div>
     </nav>
 
-    <header class="hero-bg text-white pt-20 pb-24 px-4">
-        <div class="container mx-auto text-center max-w-3xl">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight primary-text">Transforme seu Departamento de RH</h1>
-            <p class="text-xl md:text-2xl mb-4 opacity-90 text-secondary-default">Delegue até 90% do seu trabalho para <strong class="accent-text">50 assistentes de IA</strong> especializados.</p>
-            <p class="text-lg mb-10 opacity-80 text-secondary-default">Um exército de especialistas em Recursos Humanos disponíveis 24/7 para automatizar processos, aumentar produtividade e reduzir custos.</p>
-            <div class="space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="accent-bg text-white font-semibold py-3 px-8 rounded-lg text-lg hover:opacity-80 transition-opacity inline-block shadow-lg">Começar Agora</a>
-                <a href="#demonstracao" id="verDemoButton" class="border-2 accent-border accent-text font-semibold py-3 px-7 rounded-lg text-lg hover:accent-bg hover:text-white transition-colors inline-block shadow-lg">Ver Demonstração</a>
+    <header id="hero-main" class="text-white px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-8 py-12 md:py-0">
+            <div class="hero-content md:w-1/2 lg:w-2/5 text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight primary-text">Transforme seu Departamento de RH</h1>
+                <p class="text-xl md:text-2xl mb-4 opacity-90 text-secondary-default">Delegue até 90% do seu trabalho para <strong class="accent-text">50 assistentes de IA</strong> especializados.</p>
+                <p class="text-lg mb-10 opacity-80 text-secondary-default">Um exército de especialistas em Recursos Humanos disponíveis 24/7 para automatizar processos, aumentar produtividade e reduzir custos.</p>
+                <div class="space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="accent-bg text-white font-semibold py-3 px-8 rounded-lg text-lg hover:opacity-80 transition-opacity inline-block shadow-lg">Começar Agora</a>
+                    <a href="#demonstracao" id="verDemoButton" class="border-2 accent-border accent-text font-semibold py-3 px-7 rounded-lg text-lg hover:accent-bg hover:text-white transition-colors inline-block shadow-lg">Ver Demonstração</a>
+                </div>
+            </div>
+            <div class="hero-image-container md:w-1/2 lg:w-3/5">
+                <img src="imagens/imagem_padrao_pagina_principal.png" alt="Especialistas de RH e IA" class="rounded-lg shadow-2xl">
             </div>
         </div>
     </header>
-
-    <section id="image-separator">
-        <img src="imagens/imagem_padrao_pagina_principal.png" alt="Destaque visual com especialistas de RH e IA">
-    </section>
-
 
     <section id="como-transforma" class="py-16 md:py-24 section-bg-light">
         <div class="container mx-auto px-4">
@@ -612,24 +611,37 @@
         });
         
         const navLinks = document.querySelectorAll('nav a.nav-link, #mobileMenu a.nav-link');
-        const sections = document.querySelectorAll('section[id]');
+        const sections = Array.from(document.querySelectorAll('section[id]'));
 
         function changeNavActiveState() {
-            let index = sections.length;
+            let scrollY = window.pageYOffset;
             const navbarHeight = document.getElementById('navbar').offsetHeight;
+            let activeSectionId = null;
 
-            while(--index && window.scrollY + navbarHeight + 50 < sections[index].offsetTop) {}
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - navbarHeight - 50; 
+                let sectionId = current.getAttribute('id');
+                
+                if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight){
+                   if (sectionId === 'demonstracao' && current.classList.contains('hidden')) {
+                       // Não ativa o link da demonstração se a seção estiver oculta
+                   } else {
+                       activeSectionId = sectionId;
+                   }
+                }
+            });
             
-            navLinks.forEach((link) => link.classList.remove('active'));
-            if (sections[index]) { // Check if sections[index] exists
-                 const activeLink = document.querySelector(`nav a[href="#${sections[index].id}"], #mobileMenu a[href="#${sections[index].id}"]`);
-                 if (activeLink) {
-                    activeLink.classList.add('active');
-                 }
-            }
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${activeSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
         }
-        changeNavActiveState(); // Initial check
+        
         window.addEventListener('scroll', changeNavActiveState);
+        document.addEventListener('DOMContentLoaded', changeNavActiveState);
 
 
         document.querySelectorAll('#mobileMenu a[href^="#"], nav a[href^="#"]').forEach(anchor => {
@@ -642,6 +654,11 @@
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        // Se for o link da demonstração e ela estiver oculta, primeiro a revela.
+                        if (targetId === '#demonstracao' && targetElement.classList.contains('hidden')) {
+                            targetElement.classList.remove('hidden');
+                        }
+
                         const navbarHeight = document.getElementById('navbar').offsetHeight;
                         const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -650,6 +667,8 @@
                             top: offsetPosition,
                             behavior: "smooth"
                         });
+                        // Atualiza o estado ativo após o scroll
+                        setTimeout(changeNavActiveState, 750); 
                     }
                 }
             });
@@ -861,8 +880,6 @@
                 e.preventDefault();
                 if (demonstracaoSection) {
                     demonstracaoSection.classList.remove('hidden');
-                    // A lógica de scroll para a seção de demonstração já está no loop de links de navegação.
-                    // Para garantir que funcione ao clicar no botão específico:
                      const navbarHeight = document.getElementById('navbar').offsetHeight;
                      const elementPosition = demonstracaoSection.getBoundingClientRect().top;
                      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -870,6 +887,7 @@
                          top: offsetPosition,
                          behavior: "smooth"
                      });
+                     setTimeout(changeNavActiveState, 750); 
                 }
             });
         }
