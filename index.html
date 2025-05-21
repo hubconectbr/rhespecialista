@@ -22,6 +22,7 @@
             --nav-bg-default: rgba(26, 0, 43, 0.85);
             --nav-link-text-default: #E9D8FF;
             --nav-link-hover-default: #FFFFFF;
+            --nav-link-active-text-default: #FF00E5; /* Cor para link ativo */
             --card-bg-default: #25003D;
             --card-bg-alt-default: #30004C; 
             --card-border-default: #4A0072;
@@ -37,35 +38,38 @@
             --btn-paste-text-default: #E9D8FF;
             --btn-paste-hover-bg-default: #5C2483;
             --text-green-positive: #34D399;
+            --image-separator-bg: var(--bg-hero-default); /* Fundo para a seção da imagem separadora */
         }
 
         [data-theme="grafite"] {
             --bg-main-default: #000020; 
             --bg-hero-default: #171a4a;  
             --text-primary-default: #FFFFFF; 
-            --text-secondary-default: #D1D5DB; /* Cinza claro azulado */
-            --text-lighter-default: #9CA3AF; /* Cinza médio azulado */
+            --text-secondary-default: #D1D5DB; 
+            --text-lighter-default: #9CA3AF; 
             --accent-bg-default: #FF00E5; 
             --accent-text-default: #FF00E5;
             --accent-border-default: #FF00E5;
             --nav-bg-default: rgba(23, 26, 74, 0.85); 
             --nav-link-text-default: #D1D5DB;
             --nav-link-hover-default: #FFFFFF;
+            --nav-link-active-text-default: #FF00E5; /* Cor para link ativo no tema grafite */
             --card-bg-default: #2f2c79; 
             --card-bg-alt-default: #171a4a; 
-            --card-border-default: #4338CA; /* Um azul índigo para borda */
+            --card-border-default: #4338CA; 
             --section-bg-light-default: #171a4a; 
             --section-bg-darker-default: #000020; 
             --footer-bg-default: #000020;
             --footer-text-default: #9CA3AF;
             --footer-link-hover-default: #FF00E5;
-            --demo-input-bg-default: rgba(47, 44, 121, 0.5); /* Baseado em #2f2c79 */
+            --demo-input-bg-default: rgba(47, 44, 121, 0.5); 
             --demo-input-border-default: #4338CA;
             --demo-input-text-default: #D1D5DB;
             --btn-paste-bg-default: #4338CA;
             --btn-paste-text-default: #FFFFFF;
-            --btn-paste-hover-bg-default: #3730A3; /* Um tom mais escuro de índigo */
-            --text-green-positive: #10B981; /* Verde esmeralda para bom contraste */
+            --btn-paste-hover-bg-default: #3730A3; 
+            --text-green-positive: #10B981; 
+            --image-separator-bg: var(--bg-hero-default);
         }
 
         body {
@@ -86,6 +90,8 @@
         .nav-bg { background-color: var(--nav-bg-default); } 
         .nav-link-text { color: var(--nav-link-text-default); } 
         .nav-link-text:hover { color: var(--nav-link-hover-default); }
+        .nav-link.active { color: var(--nav-link-active-text-default) !important; font-weight: 600; }
+
 
         .card-bg-base { background-color: var(--card-bg-default); } 
         .card-bg-alt { background-color: var(--card-bg-alt-default); } 
@@ -292,20 +298,42 @@
             color: var(--accent-text-default);
             background-color: rgba(var(--accent-rgb, 255,0,229),0.2); 
         }
-        :root { /* Adicionar acento RGB para o tema padrão */
+        :root { 
              --accent-rgb: 255,0,229;
         }
-        [data-theme="grafite"] { /* Adicionar acento RGB para o tema grafite */
-            --accent-rgb: 255,0,229; /* Pode ser diferente se o acento mudar */
+        [data-theme="grafite"] { 
+            --accent-rgb: 255,0,229; 
         }
 
         .footer-text { color: var(--footer-text-default); }
         .footer-link:hover { color: var(--footer-link-hover-default); }
 
+        #image-separator {
+            background-color: var(--image-separator-bg);
+            padding: 0; /* Remover padding se a imagem for cobrir tudo */
+            line-height: 0; /* Para remover espaço extra se a imagem for inline-block */
+        }
+        #image-separator img {
+            width: 100%;
+            height: auto; /* Manter proporção */
+            max-height: 300px; /* Limitar altura máxima para não ficar muito grande */
+            object-fit: cover; /* Cobrir a área, pode cortar um pouco da imagem */
+        }
+
     </style>
     <!-- Visualization & Content Choices: 
-        - Theme Switcher: Buttons with Sun/Moon icons in Nav. Goal: User Preference. Justification: Allows visual customization.
-        - All other sections will adapt colors based on the active theme via CSS variables.
+        - Theme Switcher: Buttons with Sun/Moon icons in Nav. Goal: User Preference.
+        - Hero: Text, CTAs. Goal: Inform, Engage.
+        - Image Separator (NOVA): Full-width responsive image. Goal: Visual Appeal, Brand Reinforcement, Section Transition.
+        - Como Transforma: Cards with icons (Unicode). Goal: Inform.
+        - Visão Geral dos Temas: Grid of theme mascots and names. Goal: Navigate, Inform.
+        - Nossos Especialistas Detalhados: Sections for each of the 10 RH themes. Goal: Organize, Inform, Explore.
+        - Demonstração Interativa: Dropdown, textarea, mock output. Goal: Engage, Demonstrate Value.
+        - Como Usar: Numbered steps. Goal: Inform.
+        - Depoimentos: Cards. Goal: Build Trust.
+        - Planos: Comparison cards. Goal: Convert.
+        - FAQ: Accordion list. Goal: Inform, Overcome Objections.
+        - Floating Attendant(s): Images with CSS animation and JS scroll effect. Goal: Engage, Brand Reinforcement.
         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
 </head>
@@ -316,12 +344,12 @@
             <a href="#" class="text-2xl font-bold text-white">RH Assistentes</a>
             <div class="flex items-center">
                 <div class="hidden md:flex space-x-6 mr-6">
-                    <a href="#temas-overview" class="nav-link-text transition-colors">Temas</a>
-                    <a href="#especialistas" class="nav-link-text transition-colors">Especialistas</a>
-                    <a href="#demonstracao" class="nav-link-text transition-colors">Demonstração</a>
-                    <a href="#como-usar" class="nav-link-text transition-colors">Como Usar</a>
-                    <a href="#planos" class="nav-link-text transition-colors">Planos</a>
-                    <a href="#faq" class="nav-link-text transition-colors">FAQ</a>
+                    <a href="#temas-overview" class="nav-link nav-link-text transition-colors">Temas</a>
+                    <a href="#especialistas" class="nav-link nav-link-text transition-colors">Especialistas</a>
+                    <a href="#demonstracao" class="nav-link nav-link-text transition-colors">Demonstração</a>
+                    <a href="#como-usar" class="nav-link nav-link-text transition-colors">Como Usar</a>
+                    <a href="#planos" class="nav-link nav-link-text transition-colors">Planos</a>
+                    <a href="#faq" class="nav-link nav-link-text transition-colors">FAQ</a>
                 </div>
                 <div class="theme-switcher flex items-center space-x-1 md:space-x-2">
                     <button id="theme-default-button" title="Tema Padrão (Roxo)" class="active-theme">☀️</button>
@@ -334,12 +362,12 @@
             </div>
         </div>
         <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-gray-800 bg-opacity-95 shadow-lg py-2" style="background-color: var(--nav-bg-default);">
-            <a href="#temas-overview" class="block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Temas</a>
-            <a href="#especialistas" class="block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Especialistas</a>
-            <a href="#demonstracao" class="block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Demonstração</a>
-            <a href="#como-usar" class="block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Como Usar</a>
-            <a href="#planos" class="block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Planos</a>
-            <a href="#faq" class="block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">FAQ</a>
+            <a href="#temas-overview" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Temas</a>
+            <a href="#especialistas" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Especialistas</a>
+            <a href="#demonstracao" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Demonstração</a>
+            <a href="#como-usar" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Como Usar</a>
+            <a href="#planos" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">Planos</a>
+            <a href="#faq" class="nav-link block px-4 py-2 nav-link-text hover:bg-opacity-20 hover:bg-white">FAQ</a>
             <a href="https://hotmart.com/pt-br/marketplace/produtos/assistentevirtualrh/H99753866C?coupon=cna-50.00-fm370cu0&sck=HOTMART_MEM_CA&off=c0b63fyx" target="_blank" class="block px-4 py-2 accent-bg text-white text-center mx-4 my-2 rounded-lg">Começar Agora</a>
         </div>
     </nav>
@@ -355,6 +383,11 @@
             </div>
         </div>
     </header>
+
+    <section id="image-separator">
+        <img src="imagens/imagem_padrao_pagina_principal.png" alt="Destaque visual com especialistas de RH e IA">
+    </section>
+
 
     <section id="como-transforma" class="py-16 md:py-24 section-bg-light">
         <div class="container mx-auto px-4">
@@ -578,7 +611,28 @@
             mobileMenu.classList.toggle('hidden');
         });
         
-        document.querySelectorAll('#mobileMenu a, nav a[href^="#"]').forEach(anchor => {
+        const navLinks = document.querySelectorAll('nav a.nav-link, #mobileMenu a.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        function changeNavActiveState() {
+            let index = sections.length;
+            const navbarHeight = document.getElementById('navbar').offsetHeight;
+
+            while(--index && window.scrollY + navbarHeight + 50 < sections[index].offsetTop) {}
+            
+            navLinks.forEach((link) => link.classList.remove('active'));
+            if (sections[index]) { // Check if sections[index] exists
+                 const activeLink = document.querySelector(`nav a[href="#${sections[index].id}"], #mobileMenu a[href="#${sections[index].id}"]`);
+                 if (activeLink) {
+                    activeLink.classList.add('active');
+                 }
+            }
+        }
+        changeNavActiveState(); // Initial check
+        window.addEventListener('scroll', changeNavActiveState);
+
+
+        document.querySelectorAll('#mobileMenu a[href^="#"], nav a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 if (this.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
@@ -807,13 +861,15 @@
                 e.preventDefault();
                 if (demonstracaoSection) {
                     demonstracaoSection.classList.remove('hidden');
-                    const navbarHeight = document.getElementById('navbar').offsetHeight;
-                    const elementPosition = demonstracaoSection.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
+                    // A lógica de scroll para a seção de demonstração já está no loop de links de navegação.
+                    // Para garantir que funcione ao clicar no botão específico:
+                     const navbarHeight = document.getElementById('navbar').offsetHeight;
+                     const elementPosition = demonstracaoSection.getBoundingClientRect().top;
+                     const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+                     window.scrollTo({
+                         top: offsetPosition,
+                         behavior: "smooth"
+                     });
                 }
             });
         }
