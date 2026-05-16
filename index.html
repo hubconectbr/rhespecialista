@@ -146,11 +146,12 @@
             align-items: center; 
         }
         .tema-card-overview img {
-            width: 240px; 
-            height: 240px; 
-            object-fit: contain;
-            margin-bottom: 0.75rem;
-            border-radius: 0.25rem;
+           width: 100%; /* Ocupa a largura do card */
+           max-width: 200px; /* Limite máximo */
+           height: auto; /* Mantém a proporção */
+           object-fit: contain;
+           margin-bottom: 0.75rem;
+           border-radius: 0.25rem;
         }
          .tema-card-overview p {
             font-size: 0.875rem; 
@@ -777,7 +778,7 @@
                 descricao: "Ferramentas para promover um ambiente de trabalho mais diverso, equitativo e inclusivo.",
                 bots: [
                     { nome: "Analisador de Viés em Processos de RH", imagemBot: "imagens/Tema_9/EQUIP.png" },
-                    { nome: "Criador de Programas de Sensibilização em D&I, imagemBot: "imagens/Tema_9/METRON.png" },
+                    { nome: "Criador de Programas de Sensibilização em D&I", imagemBot: "imagens/Tema_9/METRON.png" },
                     { nome: "Consultor para Políticas de Inclusão", imagemBot: "imagens/Tema_9/INCLUS2.png"},
                     { nome: "Gerador de Conteúdo Inclusivo e Acessível", imagemBot: "imagens/Tema_9/INCLUS.png" },
                     { nome: "Facilitador de Comitês de Diversidade", imagemBot: "imagens/Tema_9/EQUIP.png" }
